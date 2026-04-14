@@ -1,0 +1,9 @@
+<h1>{{ post.title }}</h1>
+<p>By {{ post.author.username }} on {{ post.created_at }}</p>
+{% if post.image %}
+    <img src="{{ post.image.url }}" alt="Post Image" style="max-width:600px;"> 
+{% endif %}
+<div>
+    {{ post.content|linebreaks }}
+</div>
+<a href="{% url 'home' %}">Back to Home</a>
