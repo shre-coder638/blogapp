@@ -34,6 +34,15 @@ else:
     # sensible defaults for local development
     ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
+# If running on Render (or similar platforms) they often provide the external
+# hostname via an environment variable like RENDER_EXTERNAL_HOSTNAME — include
+# it automatically so you don't need to set ALLOWED_HOSTS manually on deploy.
+render_host = os.environ.get('RENDER_EXTERNAL_HOSTNAME') or os.environ.get('RENDER_EXTERNAL_URL')
+if render_host:
+    # avoid duplicates
+    if render_host not in ALLOWED_HOSTS:
+        ALLOWED_HOSTS.append(render_host)
+
 
 # Application definition
 
