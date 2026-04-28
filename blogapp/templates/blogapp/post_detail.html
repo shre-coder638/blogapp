@@ -1,3 +1,27 @@
+{% extends 'Base.html' %}
+
+{% block title %}{{ post.title }} - My Blog{% endblock %}
+
+{% block content %}
+  <article class="post-detail">
+    <h1>{{ post.title }}</h1>
+    <p class="meta">By {{ post.author.username }} on {{ post.created_at }}</p>
+    {% if post.image %}
+      <img src="{{ post.image.url }}" alt="Post Image" style="max-width:600px;"> 
+    {% endif %}
+    <div class="content">{{ post.content|linebreaks }}</div>
+    <p>
+      <a href="{% url 'home' %}">Back to Home</a>
+      {% if user.is_authenticated and user.pk == post.author_id %}
+        <a class="button button-muted" href="{% url 'post_edit' post.id %}" style="margin-left:0.6rem;">Edit</a>
+        <form method="post" action="{% url 'post_delete' post.id %}" style="display:inline-block; margin-left:0.6rem;" onsubmit="return confirm('Delete this post?');">
+          {% csrf_token %}
+          <button class="button button-danger" type="submit">Delete</button>
+        </form>
+      {% endif %}
+    </p>
+  </article>
+{% endblock %}
 <h1>{{ post.title }}</h1>
 <p>By {{ post.author.username }} on {{ post.created_at }}</p>
 {% if post.image %}

@@ -1,0 +1,18 @@
+{% extends 'Base.html' %}
+
+{% block title %}Create Post - My Blog{% endblock %}
+
+{% block content %}
+  <h1>Create Post</h1>
+  <div class="form-shell">
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <div class="form-actions">
+        <button class="button button-primary" type="submit">Publish</button>
+        <a class="action-link" href="{% url 'my_posts' %}">My Posts</a>
+        <a class="action-link" href="{% url 'home' %}">Back</a>
+      </div>
+    </form>
+  </div>
+{% endblock %}

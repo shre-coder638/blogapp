@@ -1,0 +1,17 @@
+{% extends 'Base.html' %}
+
+{% block title %}Edit Post - My Blog{% endblock %}
+
+{% block content %}
+  <h1>Edit Post</h1>
+  <div class="form-shell">
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <div class="form-actions">
+        <button class="button button-primary" type="submit">Save</button>
+        <a class="action-link" href="{% url 'post_details' post.id %}">Cancel</a>
+      </div>
+    </form>
+  </div>
+{% endblock %}
